@@ -5,7 +5,31 @@
     </div>
   </div>
   <div class="row text-white">
-    <div class="col-3 bg-info p-2">Categories {{ categories.length }}</div>
-    <div class="col-9 bg-success p-2">Products {{ products.length }}</div>
+    <div class="col-3 bg-info p-2">
+      <button
+        class="btn btn-block btn-outline-primary"
+        (click)="changeCategory()">
+        HOME
+      </button>
+      <button
+        *ngFor="let cat of categories"
+        class="btn btn-block btn-outline-primary"
+        [class.active]="cat == selectedCategory"
+        (click)="changeCategory(cat)">
+        {{ cat }}
+      </button>
+    </div>
+    <div class="col-9 bg-success p-2">
+      Products {{ products.length }}
+      <div *ngFor="let product_i of products" class="card m-1p-1 bg-dark">
+        <h4>
+          {{ product_i.name }}
+          <span class="badge badge-pill adge-primary float-right">{{
+            product_i.price | currency: "EUR":"symbol":"2.2-2"
+          }}</span>
+        </h4>
+        <div class="card-text bg-white p-1">{{ product_i.description }}</div>
+      </div>
+    </div>
   </div>
 </div>
