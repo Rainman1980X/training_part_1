@@ -7,13 +7,13 @@
   <div class="row text-white">
     <div class="col-3 bg-info p-2">
       <button
-        class="btn btn-block btn-outline-primary"
+        class="btn btn-block btn-outline-dark"
         (click)="changeCategory()">
         HOME
       </button>
       <button
         *ngFor="let cat of categories"
-        class="btn btn-block btn-outline-primary"
+        class="btn btn-block btn-outline-dark"
         [class.active]="cat == selectedCategory"
         (click)="changeCategory(cat)">
         {{ cat }}
@@ -28,7 +28,7 @@
             product_i.price | currency: "EUR":"symbol":"2.2-2"
           }}</span>
         </h4>
-        <div class="card-text bg-white p-1">{{ product_i.description }}</div>
+        <div class="card-text bg-dark p-1">{{ product_i.description }}</div>
       </div>
     </div>
   </div>
