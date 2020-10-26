@@ -15,6 +15,7 @@ export class StaticDataSource {
     new Product(8, 'Hose', 'Category 1', 'Blaue Hose', 15.5),
     new Product(9, 'Hose', 'Category 2', 'Blaue Hose', 15.5),
     new Product(10, 'Hose', 'Category 1', 'Blaue Hose', 15.5),
+    new Product(11, 'T-Shirt', 'Category 3', 'Rotes Hemd', 16.5),
   ];
 
   public getProducts():Observable<Product[]>{
