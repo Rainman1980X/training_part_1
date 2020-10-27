@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ProductRepository } from '../../Model/product.repository';
 import { Product } from '../../Model/product.model';
 import { Cart } from './cart.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'store',
@@ -14,12 +16,11 @@ export class StoreComponent implements OnInit {
   public productsPerPage = 4;
   public selectedPage = 1;
 
-  constructor(private repository: ProductRepository, private cart: Cart) {}
+  constructor(private repository: ProductRepository, private cart: Cart, private router:Router) {}
 
   ngOnInit(): void {}
 
   get products(): Product[] {
-    console.log('Welcher Index?' + this.selectedPage);
     let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
     return this.repository
       .getProducts(this.selectedCategory)
@@ -54,7 +55,8 @@ export class StoreComponent implements OnInit {
       .map((x, i) => i + 1);
   }
 
-  addProductToCart( product:Product) {
+  addProductToCart(product: Product) {
     this.cart.addLine(product);
+    this.router.navigateByUrl("/cart");
   }
 }
