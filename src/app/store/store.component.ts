@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductRepository } from '../../Model/product.repository';
 import { Product } from '../../Model/product.model';
+import { Cart } from './cart.model';
 
 @Component({
   selector: 'store',
@@ -13,12 +14,12 @@ export class StoreComponent implements OnInit {
   public productsPerPage = 4;
   public selectedPage = 1;
 
-  constructor(private repository: ProductRepository) {}
+  constructor(private repository: ProductRepository, private cart: Cart) {}
 
   ngOnInit(): void {}
 
   get products(): Product[] {
-    console.log("Welcher Index?" + this.selectedPage);
+    console.log('Welcher Index?' + this.selectedPage);
     let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
     return this.repository
       .getProducts(this.selectedCategory)
@@ -40,7 +41,6 @@ export class StoreComponent implements OnInit {
   changePageSize(newSize: number) {
     console.log(newSize);
     this.productsPerPage = Number(newSize);
-    //this.changeCategory(1);
   }
 
   get pageNumbers(): number[] {
@@ -52,5 +52,9 @@ export class StoreComponent implements OnInit {
     )
       .fill(0)
       .map((x, i) => i + 1);
+  }
+
+  addProductToCart( product:Product) {
+    this.cart.addLine(product);
   }
 }
