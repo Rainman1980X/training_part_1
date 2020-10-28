@@ -11,6 +11,7 @@ const routes: Routes = [];
 
 @NgModule({
   imports: [
+    
     BrowserModule,
     StoreModule,
     RouterModule.forRoot([
@@ -27,6 +28,11 @@ const routes: Routes = [];
       {
         path: 'checkout',
         component: CheckoutComponent,
+        canActivate: [StoreFirstGaurd],
+      },
+      {
+        path: 'admin',
+        loadChildren: () => import('./Admin/admin.module').then(m => m.AdminModule),
         canActivate: [StoreFirstGaurd],
       },
       { path: '**', redirectTo: '/store' },
