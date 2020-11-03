@@ -1,20 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { StaticDataSource } from './static.datasource';
 import { Product } from './product.model';
 
 @Injectable()
-export class ProductRepository {
+export class ProductRepository implements OnInit {
   private products: Product[] = [];
   private categories: string[] = [];
 
   constructor(private datasouce: StaticDataSource) {
-    datasouce.getProducts().subscribe((data) => {
+    this.datasouce.getProducts().subscribe((data) => {
       this.products = data;
       this.categories = data
         .map((p) => p.category)
         .filter((c, index, array) => array.indexOf(c) == index)
         .sort();
     });
+  }
+  ngOnInit(){
+    
   }
   getProducts(category: string = null): Product[] {
     return this.products.filter(

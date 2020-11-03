@@ -4,6 +4,7 @@ import { ProductRepository } from '../../Model/product.repository';
 import { Product } from '../../Model/product.model';
 import { Cart } from './cart.model';
 import { Router } from '@angular/router';
+import { StaticDataSource } from '../../Model/static.datasource';
 
 @Component({
   selector: 'store',
@@ -16,9 +17,11 @@ export class StoreComponent implements OnInit {
   public productsPerPage = 4;
   public selectedPage = 1;
 
-  constructor(private repository: ProductRepository, private cart: Cart, private router:Router) {}
+  constructor(private repository: ProductRepository, private cart: Cart, private router:Router, private storeDB: StaticDataSource) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.storeDB.getProducts().subscribe(x => console.log(x));
+  }
 
   get products(): Product[] {
     let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
